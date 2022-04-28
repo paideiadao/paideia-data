@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  p-postgres:
+    container_name: p-postgres
+    env_file: ${ENV_FILE}
+    image: postgres:14
+    shm_size: 512m
+    restart: always
+    volumes: 
+      - p-postgres_vol:/var/lib/postgresql/data:cached
+    ports: 
+      - ${POSTGRES_PORT}:5432
+    networks:
+      - p-net
+
+  p-redis:
+    container_name: p-redis
+    env_file: ${ENV_FILE}
+    image: redis
+    volumes: 
+      - p-redis_vol:/data # redis persistence
+    ports: 
+      - ${REDIS_PORT}:6789
+    networks:
+      - p-net
+    entrypoint: redis-server --appendonly yes
+
+volumes:
+  p-postgres_vol:
+  p-redis_vol:
+
+networks:
+  p-net:
+    name: p-net
+    driver: bridge
