@@ -1,0 +1,2 @@
+# paideia-data
+sql, redis
