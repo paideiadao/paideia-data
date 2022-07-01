@@ -2,7 +2,7 @@
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     alias TEXT UNIQUE NOT NULL,
-    primary_wallet_address_id INT,
+    primary_wallet_address_id INT UNIQUE,
     profile_img_url TEXT,
     hashed_password TEXT NOT NULL,
     is_active BOOLEAN DEFAULT true,
@@ -12,7 +12,7 @@ CREATE TABLE users (
 CREATE TABLE ergo_addresses (
     id SERIAL PRIMARY KEY,
     user_id INT NOT NULL,
-    address TEXT,
+    address TEXT UNIQUE,
     is_smart_contract BOOLEAN DEFAULT false
 );
 
