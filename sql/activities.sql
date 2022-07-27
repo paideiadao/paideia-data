@@ -7,6 +7,6 @@ CREATE TABLE activity_logs (
     value TEXT,
     secondary_action TEXT,
     secondary_value TEXT,
-    date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP NOT NULL,
+    date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     category TEXT
 );
