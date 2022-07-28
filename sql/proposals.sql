@@ -15,7 +15,7 @@ CREATE TABLE proposals (
     is_proposal BOOLEAN DEFAULT false
 );
 
-CREATE TABLE proposals_addendums (
+CREATE TABLE proposal_addendums (
     id SERIAL PRIMARY KEY,
     proposal_id INT NOT NULL,
     name TEXT NOT NULL,
@@ -23,7 +23,7 @@ CREATE TABLE proposals_addendums (
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE proposals_comments (
+CREATE TABLE proposal_comments (
     id SERIAL PRIMARY KEY,
     proposal_id INT NOT NULL,
     user_id INT NOT NULL,
