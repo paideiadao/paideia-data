@@ -18,7 +18,6 @@ CREATE TABLE notifications (
     img TEXT,
     action TEXT,
     proposal_id INT,
-    proposal_name TEXT,
     transaction_id TEXT,
     href TEXT,
     additional_text TEXT,
