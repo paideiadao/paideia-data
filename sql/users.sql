@@ -3,10 +3,32 @@ CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     alias TEXT UNIQUE NOT NULL,
     primary_wallet_address_id INT UNIQUE,
-    profile_img_url TEXT,
     hashed_password TEXT NOT NULL,
     is_active BOOLEAN DEFAULT true,
     is_superuser BOOLEAN DEFAULT false
+);
+
+CREATE TABLE user_details (
+    id SERIAL PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL,
+    name TEXT,
+    profile_img_url TEXT,
+    bio TEXT,
+    level INT DEFAULT 0,
+    xp INT DEFAULT 0,
+    social_links JSON DEFAULT '{}'
+);
+
+CREATE TABLE user_followers (
+    id SERIAL PRIMARY KEY,
+    follower_id INT NOT NULL,
+    followee_id INT NOT NULL
+);
+
+CREATE TABLE user_profile_settings (
+    id SERIAL PRIMARY KEY,
+    user_id INT UNIQUE NOT NULL,
+    settings JSON DEFAULT '{}'
 );
 
 CREATE TABLE ergo_addresses (
