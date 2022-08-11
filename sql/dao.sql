@@ -51,7 +51,7 @@ CREATE TABLE governances (
 CREATE TABLE governance_whitelist (
     id SERIAL PRIMARY KEY,
     governance_id INT NOT NULL,
-    user_id INT NOT NULL
+    ergo_address_id INT NOT NULL
 );
 
 -- tokenomics and distributions
@@ -69,7 +69,7 @@ CREATE TABLE tokenomics (
 
 CREATE TABLE token_holders (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    ergo_address_id INT NOT NULL,
     percentage DECIMAL,
     balance DECIMAL
 );
