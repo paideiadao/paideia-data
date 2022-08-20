@@ -1,7 +1,7 @@
 -- activity log
 CREATE TABLE activity_logs (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
     img_url TEXT,
     action TEXT,
     value TEXT,
@@ -14,10 +14,10 @@ CREATE TABLE activity_logs (
 -- notifications
 CREATE TABLE notifications (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
     img TEXT,
     action TEXT,
-    proposal_id INT,
+    proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
     transaction_id TEXT,
     href TEXT,
     additional_text TEXT,
