@@ -10,7 +10,7 @@ CREATE TABLE users (
 
 CREATE TABLE user_details (
     id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE NOT NULL,
+    user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
     name TEXT,
     profile_img_url TEXT,
     bio TEXT,
@@ -21,19 +21,19 @@ CREATE TABLE user_details (
 
 CREATE TABLE user_followers (
     id SERIAL PRIMARY KEY,
-    follower_id INT NOT NULL,
-    followee_id INT NOT NULL
+    follower_id INT REFERENCES users(id) ON DELETE CASCADE,
+    followee_id INT REFERENCES users(id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_profile_settings (
     id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE NOT NULL,
+    user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
     settings JSON DEFAULT '{}'
 );
 
 CREATE TABLE ergo_addresses (
     id SERIAL PRIMARY KEY,
-    user_id INT NOT NULL,
+    user_id INT, -- we keep the record on delete to maintain other dependencies
     address TEXT UNIQUE,
     is_smart_contract BOOLEAN DEFAULT false
 );
