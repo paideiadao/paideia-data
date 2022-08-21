@@ -47,6 +47,6 @@ CREATE TABLE proposal_followers (
 
 CREATE TABLE proposal_references (
     id SERIAL PRIMARY KEY,
-    referred_proposal_id REFERENCES proposals(id) ON DELETE CASCADE,
-    referring_proposal_id REFERENCES proposals(id) ON DELETE CASCADE
+    referred_proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
+    referring_proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE
 );
