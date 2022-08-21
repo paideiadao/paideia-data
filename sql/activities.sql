@@ -1,5 +1,5 @@
 -- activity log
-CREATE TABLE activity_logs (
+CREATE TABLE activity_log (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     img_url TEXT,
