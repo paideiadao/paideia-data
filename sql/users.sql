@@ -10,7 +10,8 @@ CREATE TABLE users (
 
 CREATE TABLE user_details (
     id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    dao_id INT,
     name TEXT,
     profile_img_url TEXT,
     bio TEXT,
@@ -27,7 +28,8 @@ CREATE TABLE user_followers (
 
 CREATE TABLE user_profile_settings (
     id SERIAL PRIMARY KEY,
-    user_id INT UNIQUE REFERENCES users(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    dao_id INT,
     settings JSON DEFAULT '{}'
 );
 
@@ -45,3 +47,12 @@ CREATE TABLE jwt_blacklist (
 );
 
 CREATE INDEX ON jwt_blacklist (token);
+
+-- execute after daos table is created
+ALTER TABLE user_details
+ADD CONSTRAINT user_details_dao_id_fkey
+FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
+
+ALTER TABLE user_profile_settings
+ADD CONSTRAINT user_profile_settings_dao_id_fkey
+FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
