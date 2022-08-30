@@ -32,5 +32,4 @@ volumes:
 
 networks:
   p-net:
-    name: p-net
-    driver: bridge
+    external: true
