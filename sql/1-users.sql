@@ -17,7 +17,8 @@ CREATE TABLE user_details (
     bio TEXT,
     level INT DEFAULT 0,
     xp INT DEFAULT 0,
-    social_links JSON DEFAULT '{}'
+    social_links JSON DEFAULT '{}',
+    UNIQUE (user_id, dao_id)
 );
 
 CREATE TABLE user_followers (
@@ -30,7 +31,8 @@ CREATE TABLE user_profile_settings (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
     dao_id INT,
-    settings JSON DEFAULT '{}'
+    settings JSON DEFAULT '{}',
+    UNIQUE (user_id, dao_id)
 );
 
 CREATE TABLE ergo_addresses (
