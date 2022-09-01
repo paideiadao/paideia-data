@@ -49,12 +49,3 @@ CREATE TABLE jwt_blacklist (
 );
 
 CREATE INDEX ON jwt_blacklist (token);
-
--- execute after daos table is created
-ALTER TABLE user_details
-ADD CONSTRAINT user_details_dao_id_fkey
-FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
-
-ALTER TABLE user_profile_settings
-ADD CONSTRAINT user_profile_settings_dao_id_fkey
-FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
