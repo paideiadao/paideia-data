@@ -3,7 +3,7 @@ CREATE TABLE daos (
     id SERIAL PRIMARY KEY,
     dao_name TEXT NOT NULL,
     dao_short_description TEXT,
-    dao_url TEXT NOT NULL,
+    dao_url TEXT UNIQUE NOT NULL,
     governance_id INT, -- constraint maintained from governance table
     tokenomics_id INT, -- constraint maintained from tokenomics table
     design_id INT, -- constraint maintained from design table
