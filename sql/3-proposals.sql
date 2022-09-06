@@ -12,6 +12,7 @@ CREATE TABLE proposals (
     tags JSON DEFAULT '{}',
     attachments JSON DEFAULT '{}',
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
+    status TEXT,
     is_proposal BOOLEAN DEFAULT false
 );
 
