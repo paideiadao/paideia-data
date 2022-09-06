@@ -59,6 +59,7 @@ CREATE TABLE tokenomics (
     id SERIAL PRIMARY KEY,
     dao_id INT REFERENCES daos(id) ON DELETE CASCADE,
     type TEXT NOT NULL,
+    token_id TEXT,
     token_name TEXT,
     token_ticker TEXT,
     token_amount DECIMAL,
