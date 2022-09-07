@@ -33,6 +33,13 @@ CREATE TABLE proposal_comments (
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
+CREATE TABLE proposal_comments_likes (
+    id SERIAL PRIMARY KEY,
+    comment_id INT REFERENCES proposal_comments(id) ON DELETE CASCADE,
+    user_id INT REFERENCES users(id) ON DELETE CASCADE,
+    liked BOOLEAN -- true if liked, false if disliked
+);
+
 CREATE TABLE proposal_likes (
     id SERIAL PRIMARY KEY,
     proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
