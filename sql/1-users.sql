@@ -17,7 +17,7 @@ CREATE TABLE user_details (
     bio TEXT,
     level INT DEFAULT 0,
     xp INT DEFAULT 0,
-    social_links JSON DEFAULT '{}',
+    social_links JSON DEFAULT '[]',
     UNIQUE (user_id, dao_id)
 );
 
