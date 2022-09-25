@@ -8,6 +8,7 @@ CREATE TABLE users (
     is_superuser BOOLEAN DEFAULT false
 );
 
+-- has dao specific user data
 CREATE TABLE user_details (
     id SERIAL PRIMARY KEY,
     user_id INT REFERENCES users(id) ON DELETE CASCADE,
@@ -23,16 +24,15 @@ CREATE TABLE user_details (
 
 CREATE TABLE user_followers (
     id SERIAL PRIMARY KEY,
-    follower_id INT REFERENCES users(id) ON DELETE CASCADE,
-    followee_id INT REFERENCES users(id) ON DELETE CASCADE
+    follower_id INT REFERENCES user_details(id) ON DELETE CASCADE,
+    followee_id INT REFERENCES user_details(id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_profile_settings (
     id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    dao_id INT,
+    user_details_id INT REFERENCES user_details(id) ON DELETE CASCADE,
     settings JSON DEFAULT '{}',
-    UNIQUE (user_id, dao_id)
+    UNIQUE (user_details_id)
 );
 
 CREATE TABLE ergo_addresses (
