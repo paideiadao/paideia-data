@@ -114,7 +114,3 @@ CREATE TABLE distribution_config (
 ALTER TABLE user_details
 ADD CONSTRAINT user_details_dao_id_fkey
 FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
-
-ALTER TABLE user_profile_settings
-ADD CONSTRAINT user_profile_settings_dao_id_fkey
-FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
