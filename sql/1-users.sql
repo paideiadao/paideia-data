@@ -49,3 +49,8 @@ CREATE TABLE jwt_blacklist (
 );
 
 CREATE INDEX ON jwt_blacklist (token);
+
+-- patches
+ALTER TABLE users
+ADD CONSTRAINT users_primary_wallet_address_id_fkey
+FOREIGN KEY (primary_wallet_address_id) REFERENCES ergo_addresses(id);

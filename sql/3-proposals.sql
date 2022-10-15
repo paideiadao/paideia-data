@@ -58,3 +58,9 @@ CREATE TABLE proposal_references (
     referred_proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
     referring_proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE
 );
+
+-- patches
+ALTER TABLE proposal_comments
+ADD CONSTRAINT proposal_comments_parent_fkey
+FOREIGN KEY (parent) REFERENCES proposal_comments(id)
+ON DELETE CASCADE;
