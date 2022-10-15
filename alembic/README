@@ -1,0 +1,7 @@
+- added to env.py:
+    config.set_main_option("sqlalchemy.url", f"postgresql://{getenv('POSTGRES_USER')}:{getenv('POSTGRES_PASSWORD')}@{getenv('POSTGRES_HOST')}:{getenv('POSTGRES_PORT')}/{getenv('POSTGRES_DB')}" )
+    ...
+    SqlAlchemyBase = dec.declarative_base()
+    target_metadata = SqlAlchemyBase.metadata
+
+- created Dockerfile with required env/apps
