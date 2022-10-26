@@ -122,8 +122,8 @@ CREATE VIEW vw_daos AS (
         D.dao_name,
         D.dao_url,
         T.token_id,
-        D.logo_url
+        DD.logo_url
     FROM daos D
-    INNER JOIN tokenomics T ON T.dao_id = D.dao_id
-    INNER JOIN dao_designs DD ON DD.dao_id = D.dao_id
+    INNER JOIN tokenomics T ON T.dao_id = D.id
+    INNER JOIN dao_designs DD ON DD.dao_id = D.id
 )

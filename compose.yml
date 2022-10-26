@@ -3,7 +3,7 @@ version: '3.9'
 services:
   p-postgres:
     container_name: p-postgres
-    env_file: ${ENV_FILE}
+    env_file: .env
     image: postgres:14
     shm_size: 512m
     restart: always
@@ -16,12 +16,12 @@ services:
 
   p-redis:
     container_name: p-redis
-    env_file: ${ENV_FILE}
+    env_file: .env
     image: redis
     volumes: 
       - p-redis_vol:/data # redis persistence
     ports: 
-      - ${REDIS_PORT}:6789
+      - ${REDIS_PORT}:6379
     networks:
       - p-net
     entrypoint: redis-server --appendonly yes
