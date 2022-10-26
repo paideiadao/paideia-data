@@ -3,7 +3,7 @@ version: '3.9'
 services:
   p-postgres:
     container_name: p-postgres
-    env_file: .env
+    env_file: ENV_FILE
     image: postgres:14
     shm_size: 512m
     restart: always
