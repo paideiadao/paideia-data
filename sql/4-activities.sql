@@ -25,6 +25,7 @@ CREATE TABLE notifications (
     is_read BOOLEAN DEFAULT false
 );
 
+-- views
 CREATE VIEW vw_activity_log AS (
     SELECT
         AL.id,
@@ -41,3 +42,5 @@ CREATE VIEW vw_activity_log AS (
         activity_log AL
         INNER JOIN user_details UD ON UD.id = AL.user_details_id
 );
+
+ALTER TABLE activity_log DROP COLUMN img_url;

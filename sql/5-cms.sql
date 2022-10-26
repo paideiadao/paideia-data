@@ -10,3 +10,19 @@ CREATE TABLE blogs (
     additional_details JSON DEFAULT '{}',
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
+
+-- faq section
+CREATE TABLE faqs (
+    id SERIAL PRIMARY KEY,
+    question TEXT NOT NULL,
+    answer TEXT,
+    tags JSON DEFAULT '[]'
+);
+
+-- quotes
+CREATE TABLE quotes (
+    id SERIAL PRIMARY KEY,
+    quote TEXT NOT NULL,
+    author TEXT,
+    show BOOLEAN DEFAULT true
+);
