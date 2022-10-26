@@ -114,3 +114,16 @@ CREATE TABLE distribution_config (
 ALTER TABLE user_details
 ADD CONSTRAINT user_details_dao_id_fkey
 FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
+
+
+CREATE VIEW vw_daos AS (
+    SELECT
+        D.id,
+        D.dao_name,
+        D.dao_url,
+        T.token_id,
+        D.logo_url
+    FROM daos D
+    INNER JOIN tokenomics T ON T.dao_id = D.dao_id
+    INNER JOIN dao_designs DD ON DD.dao_id = D.dao_id
+)
