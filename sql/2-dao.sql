@@ -122,8 +122,14 @@ CREATE VIEW vw_daos AS (
         D.dao_name,
         D.dao_url,
         T.token_id,
-        DD.logo_url
+        DD.logo_url,
+        COUNT(DISTINCT UD.id) AS member_count,
+        COUNT(DISTINCT P.id) AS proposal_count
+        
     FROM daos D
     INNER JOIN tokenomics T ON T.dao_id = D.id
     INNER JOIN dao_designs DD ON DD.dao_id = D.id
+    LEFT JOIN user_details UD ON UD.dao_id = D.id
+    LEFT JOIN proposals P ON P.dao_id = D.id
+    GROUP BY D.id, D.dao_name, D.dao_url, T.token_id, DD.logo_url
 )
