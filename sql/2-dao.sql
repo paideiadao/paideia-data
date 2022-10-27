@@ -123,6 +123,7 @@ CREATE VIEW vw_daos AS (
         D.dao_url,
         T.token_id,
         DD.logo_url,
+        T.token_ticker,
         COUNT(DISTINCT UD.id) AS member_count,
         COUNT(DISTINCT P.id) AS proposal_count
         
