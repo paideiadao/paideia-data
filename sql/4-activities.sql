@@ -2,7 +2,6 @@
 CREATE TABLE activity_log (
     id SERIAL PRIMARY KEY,
     user_details_id INT REFERENCES user_details(id) ON DELETE CASCADE,
-    img_url TEXT,
     action TEXT,
     value TEXT,
     secondary_action TEXT,
@@ -24,23 +23,3 @@ CREATE TABLE notifications (
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     is_read BOOLEAN DEFAULT false
 );
-
--- views
-CREATE VIEW vw_activity_log AS (
-    SELECT
-        AL.id,
-        AL.user_details_id,
-        UD.name,
-        UD.profile_img_url as img_url,
-        AL.action,
-        AL.value,
-        AL.secondary_action,
-        AL.secondary_value,
-        date,
-        category
-    FROM
-        activity_log AL
-        INNER JOIN user_details UD ON UD.id = AL.user_details_id
-);
-
-ALTER TABLE activity_log DROP COLUMN img_url;

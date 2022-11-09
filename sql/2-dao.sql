@@ -14,7 +14,14 @@ CREATE TABLE daos (
 );
 
 -- design
-CREATE TABLE dao_themes (id SERIAL PRIMARY KEY);
+CREATE TABLE dao_themes (
+    id SERIAL PRIMARY KEY,
+    theme_name TEXT NOT NULL,
+    primary_color TEXT NOT NULL,
+    secondary_color TEXT NOT NULL,
+    dark_primary_color TEXT NOT NULL,
+    dark_secondary_color TEXT NOT NULL
+);
 
 CREATE TABLE dao_designs (
     id SERIAL PRIMARY KEY,
@@ -114,24 +121,3 @@ CREATE TABLE distribution_config (
 ALTER TABLE user_details
 ADD CONSTRAINT user_details_dao_id_fkey
 FOREIGN KEY (dao_id) REFERENCES daos(id) ON DELETE CASCADE;
-
-
-CREATE VIEW vw_daos AS (
-    SELECT
-        D.id,
-        D.dao_name,
-        D.dao_url,
-        D.dao_short_description,
-        DD.logo_url,
-        T.token_id,
-        T.token_ticker,
-        COUNT(DISTINCT UD.id) AS member_count,
-        COUNT(DISTINCT P.id) AS proposal_count
-        
-    FROM daos D
-    INNER JOIN tokenomics T ON T.dao_id = D.id
-    INNER JOIN dao_designs DD ON DD.dao_id = D.id
-    LEFT JOIN user_details UD ON UD.dao_id = D.id
-    LEFT JOIN proposals P ON P.dao_id = D.id
-    GROUP BY D.id, D.dao_name, D.dao_url, DD.logo_url, T.token_id, T.token_ticker
-);
