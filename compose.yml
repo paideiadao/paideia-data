@@ -9,6 +9,7 @@ services:
     restart: always
     volumes: 
       - p-postgres_vol:/var/lib/postgresql/data:cached
+      - ./sql:/docker-entrypoint-initdb.d
     ports: 
       - ${POSTGRES_PORT}:5432
     networks:
