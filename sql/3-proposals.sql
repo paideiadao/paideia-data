@@ -1,8 +1,9 @@
 -- proposals
 CREATE TABLE proposals (
-    id SERIAL PRIMARY KEY,
-    dao_id INT REFERENCES daos(id) ON DELETE CASCADE,
-    user_details_id INT, -- keeps the proposal as anonymous
+    id UUID PRIMARY KEY,
+    dao_id UUID REFERENCES daos(id) ON DELETE CASCADE,
+    on_chain_id INT,
+    user_details_id UUID, -- keeps the proposal as anonymous
     name TEXT NOT NULL,
     image_url TEXT,
     category TEXT,
@@ -17,46 +18,46 @@ CREATE TABLE proposals (
 );
 
 CREATE TABLE proposal_addendums (
-    id SERIAL PRIMARY KEY,
-    proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
+    id UUID PRIMARY KEY,
+    proposal_id UUID REFERENCES proposals(id) ON DELETE CASCADE,
     name TEXT NOT NULL,
     content TEXT,
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE proposal_comments (
-    id SERIAL PRIMARY KEY,
-    proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
-    user_details_id INT, -- keeps the comment as anonymous
+    id UUID PRIMARY KEY,
+    proposal_id UUID REFERENCES proposals(id) ON DELETE CASCADE,
+    user_details_id UUID, -- keeps the comment as anonymous
     comment TEXT,
-    parent INT,
+    parent UUID,
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE proposal_comments_likes (
-    id SERIAL PRIMARY KEY,
-    comment_id INT REFERENCES proposal_comments(id) ON DELETE CASCADE,
-    user_details_id INT REFERENCES user_details(id) ON DELETE CASCADE,
+    id UUID PRIMARY KEY,
+    comment_id UUID REFERENCES proposal_comments(id) ON DELETE CASCADE,
+    user_details_id UUID REFERENCES user_details(id) ON DELETE CASCADE,
     liked BOOLEAN -- true if liked, false if disliked
 );
 
 CREATE TABLE proposal_likes (
-    id SERIAL PRIMARY KEY,
-    proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
-    user_details_id INT REFERENCES user_details(id) ON DELETE CASCADE,
+    id UUID PRIMARY KEY,
+    proposal_id UUID REFERENCES proposals(id) ON DELETE CASCADE,
+    user_details_id UUID REFERENCES user_details(id) ON DELETE CASCADE,
     liked BOOLEAN -- true if liked, false if disliked
 );
 
 CREATE TABLE proposal_followers (
-    id SERIAL PRIMARY KEY,
-    proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
-    user_details_id INT REFERENCES user_details(id) ON DELETE CASCADE
+    id UUID PRIMARY KEY,
+    proposal_id UUID REFERENCES proposals(id) ON DELETE CASCADE,
+    user_details_id UUID REFERENCES user_details(id) ON DELETE CASCADE
 );
 
 CREATE TABLE proposal_references (
-    id SERIAL PRIMARY KEY,
-    referred_proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE,
-    referring_proposal_id INT REFERENCES proposals(id) ON DELETE CASCADE
+    id UUID PRIMARY KEY,
+    referred_proposal_id UUID REFERENCES proposals(id) ON DELETE CASCADE,
+    referring_proposal_id UUID REFERENCES proposals(id) ON DELETE CASCADE
 );
 
 -- patches

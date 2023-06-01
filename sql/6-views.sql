@@ -1,6 +1,8 @@
 CREATE VIEW vw_daos AS (
     SELECT
         D.id,
+        D.dao_key,
+        D.config_height,
         D.dao_name,
         D.dao_url,
         D.dao_short_description,

@@ -1,8 +1,8 @@
 -- users
 CREATE TABLE users (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     alias TEXT UNIQUE NOT NULL,
-    primary_wallet_address_id INT UNIQUE,
+    primary_wallet_address_id UUID UNIQUE,
     hashed_password TEXT NOT NULL,
     is_active BOOLEAN DEFAULT true,
     is_superuser BOOLEAN DEFAULT false
@@ -10,9 +10,9 @@ CREATE TABLE users (
 
 -- has dao specific user data
 CREATE TABLE user_details (
-    id SERIAL PRIMARY KEY,
-    user_id INT REFERENCES users(id) ON DELETE CASCADE,
-    dao_id INT,
+    id UUID PRIMARY KEY,
+    user_id UUID REFERENCES users(id) ON DELETE CASCADE,
+    dao_id UUID,
     name TEXT,
     profile_img_url TEXT,
     bio TEXT,
@@ -23,27 +23,27 @@ CREATE TABLE user_details (
 );
 
 CREATE TABLE user_followers (
-    id SERIAL PRIMARY KEY,
-    follower_id INT REFERENCES user_details(id) ON DELETE CASCADE,
-    followee_id INT REFERENCES user_details(id) ON DELETE CASCADE
+    id UUID PRIMARY KEY,
+    follower_id UUID REFERENCES user_details(id) ON DELETE CASCADE,
+    followee_id UUID REFERENCES user_details(id) ON DELETE CASCADE
 );
 
 CREATE TABLE user_profile_settings (
-    id SERIAL PRIMARY KEY,
-    user_details_id INT REFERENCES user_details(id) ON DELETE CASCADE,
+    id UUID PRIMARY KEY,
+    user_details_id UUID REFERENCES user_details(id) ON DELETE CASCADE,
     settings JSON DEFAULT '{}',
     UNIQUE (user_details_id)
 );
 
 CREATE TABLE ergo_addresses (
-    id SERIAL PRIMARY KEY,
-    user_id INT, -- we keep the record on delete to maintain other dependencies
+    id UUID PRIMARY KEY,
+    user_id UUID, -- we keep the record on delete to maintain other dependencies
     address TEXT UNIQUE,
     is_smart_contract BOOLEAN DEFAULT false
 );
 
 CREATE TABLE jwt_blacklist (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     token TEXT NOT NULL,
     timestamp TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP
 );

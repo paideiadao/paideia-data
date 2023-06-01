@@ -1,6 +1,6 @@
 -- blogs
 CREATE TABLE blogs (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     name TEXT NOT NULL UNIQUE,
     link TEXT NOT NULL UNIQUE,
     img_url TEXT,
@@ -13,7 +13,7 @@ CREATE TABLE blogs (
 
 -- faq section
 CREATE TABLE faqs (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     question TEXT NOT NULL,
     answer TEXT,
     tags JSON DEFAULT '[]'
@@ -21,7 +21,7 @@ CREATE TABLE faqs (
 
 -- quotes
 CREATE TABLE quotes (
-    id SERIAL PRIMARY KEY,
+    id UUID PRIMARY KEY,
     quote TEXT NOT NULL,
     author TEXT,
     show BOOLEAN DEFAULT true
@@ -29,6 +29,6 @@ CREATE TABLE quotes (
 
 -- sponsered/highlighted projects section
 CREATE TABLE project_highlights (
-    id SERIAL PRIMARY KEY,
-    dao_id INT NOT NULL REFERENCES daos(id) ON DELETE CASCADE
+    id UUID PRIMARY KEY,
+    dao_id UUID NOT NULL REFERENCES daos(id) ON DELETE CASCADE
 );
