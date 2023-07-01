@@ -22,6 +22,9 @@ CREATE TABLE dao_themes (
     dark_secondary_color TEXT NOT NULL
 );
 
+INSERT INTO dao_themes VALUES
+    ('00000000-0000-0000-0000-000000000000', 'Default', 'default', 'default', 'default', 'default');
+
 CREATE TABLE dao_designs (
     id UUID PRIMARY KEY,
     dao_id UUID REFERENCES daos(id) ON DELETE CASCADE,
