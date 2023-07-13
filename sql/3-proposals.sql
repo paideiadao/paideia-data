@@ -14,7 +14,9 @@ CREATE TABLE proposals (
     attachments JSON DEFAULT '{}',
     date TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
     status TEXT,
-    is_proposal BOOLEAN DEFAULT false
+    is_proposal BOOLEAN DEFAULT false,
+    box_height INT,
+    votes JSON
 );
 
 CREATE TABLE proposal_addendums (
