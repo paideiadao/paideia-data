@@ -33,7 +33,8 @@ CREATE VIEW vw_activity_log AS (
         AL.secondary_action,
         AL.secondary_value,
         date,
-        category
+        category,
+        link
     FROM
         activity_log AL
         INNER JOIN user_details UD ON UD.id = AL.user_details_id
